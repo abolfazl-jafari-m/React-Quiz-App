@@ -1,1 +1,9 @@
-@import "tailwindcss"
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@font-face {
+    font-family: Sour;
+    src: url("./assets/Fonts/SourGummy.ttf") format("truetype");
+}
+@theme {
+    --font-Sour : "Sour" , "sans-serif" ;
+}
