@@ -1,7 +1,12 @@
 import Question from "../../components/Question/Question.tsx";
 import Button from "../../components/Base/Button/Button.tsx";
+import {useContext} from "react";
+import {QuestionContext} from "../../Context/QuestionContext.tsx";
 
 function Questions() {
+    const {questions} = useContext(QuestionContext) as any;
+
+    console.log(questions)
     return (
             <div className={"flex items-start justify-center p-2 w-full relative h-2/3"}>
                 <Question />

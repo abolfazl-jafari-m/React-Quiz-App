@@ -2,7 +2,9 @@ import Input from "../../components/Base/Input/Input.tsx";
 import SelectBox from "../../components/Base/SelectBox/SelectBox.tsx";
 import Button from "../../components/Base/Button/Button.tsx";
 import {useNavigate} from "react-router";
-import {ChangeEvent, FormEvent, useEffect, useRef, useState} from "react";
+import {ChangeEvent, FormEvent, useContext, useEffect, useState} from "react";
+import {getQuestions} from "../../Services/Questions.ts";
+import {QuestionContext} from "../../Context/QuestionContext.tsx";
 
 interface CategoryInterface {
     id: string | number,
@@ -26,10 +28,26 @@ function Setup() {
     const [categories, setCategories] = useState<CategoryInterface[]>([]);
     const [errors, setErrors] = useState<ErrorInterface>({})
     const [formData, setFormData] = useState<FormDataInterface>({})
+    const levels = [{name: "easy", id: 1}, {name: "medium", id: 2}, {name: "hard", id: 3}];
+
+    const {setQuestions} = useContext(QuestionContext) as any;
+
 
     const handleForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        navigate("/questions");
+        const category = categories.find(item => item.id === Number(formData.qCategory))?.id;
+        const difficulty = levels.find(item => item.id === Number(formData.qDifficulty))?.name;
+        const count = Number(formData.qCount);
+
+        if (formData.qCount && formData.qCategory && formData.qDifficulty) {
+            getQuestions(count, category as number, difficulty as string)
+                .then(res => {
+                    setQuestions(res);
+                    navigate("/questions");
+                });
+        }
+
+
     }
     const validation = () => {
         const newError: ErrorInterface = {};
@@ -60,7 +78,7 @@ function Setup() {
                            ...prevState,
                            qCount: e.target.value
                        }))}
-                       value={formData.qCount}
+                       value={formData.qCount ?? ""}
                        className={"transition ease-in duration-200 bg-zinc-400 p-3 rounded-md shadow-lg shadow-gray-800 outline-none border-none dark:bg-white dark:shadow-black dark:text-black placeholder:text-gray-700 dark:placeholder:text-black"}
                        placeholder={"Please Enter Number Between 5 to 60 "} name={"qCount"} id={"qCount"}
                        label={"Number Of Question"} error={errors.count}/>
@@ -82,14 +100,14 @@ function Setup() {
                            value={formData.qDifficulty}
                            className={"transition ease-in duration-200 bg-zinc-400 p-3 rounded-md shadow-lg shadow-gray-800 outline-none border-none dark:bg-white dark:shadow-black dark:text-black text-gray-700"}
                            id={"qDifficulty"}
-                           options={[{name: "easy", id: 1}, {name: "medium", id: 2}, {name: "hard", id: 3}]}
+                           options={levels}
                            name={"qDifficulty"}
                            placeholder={"Please Select a Level Of  Question"}/>
             </div>
 
             <Button type={"submit"} label={"Start"}
                     disabled={!!Object.keys(errors).length || Object.keys(formData).length < 3}
-                    className={"transition ease-in duration-200 bg-rose-900 dark:bg-rose-600 text-white py-2 px-7 rounded-md shadow absolute right-0 bottom-0 cursor-pointer shadow-black disabled:bg-rose-200"}/>
+                    className={"transition ease-in duration-200 bg-rose-900 dark:bg-rose-600 text-white py-2 px-7 rounded-md shadow absolute right-0 bottom-0 cursor-pointer shadow-black disabled:bg-rose-200 disabled:text-black/50"}/>
         </form>
     );
 }

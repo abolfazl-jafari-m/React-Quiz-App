@@ -7,7 +7,7 @@ interface IProps {
     placeholder: string,
     name: string,
     id: string,
-    value?: string | number,
+    value ?: string | number,
     label: string,
     error?: string,
     ref?: Ref<HTMLInputElement>
@@ -18,7 +18,7 @@ function Input({type, className, onChange, placeholder, name, id, value, label, 
     return (
         <div className={"flex flex-col w-full  gap-3.5 dark:text-white"}>
             <label htmlFor={id}>{label}</label>
-            <input type={type} className={className} onChange={onChange} defaultValue={""} placeholder={placeholder}
+            <input type={type} className={className} onChange={onChange}  placeholder={placeholder}
                    name={name} id={id} value={value} ref={ref}/>
             <span className={"text-sm dark:text-red-200 text-red-600 h-3"}>{error}</span>
         </div>
