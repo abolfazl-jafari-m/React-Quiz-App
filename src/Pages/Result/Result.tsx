@@ -52,9 +52,14 @@ function Result() {
                 }
 
             </div>
-            <Button label={"Start Over"}
-                    className={"bg-rose-900 text-white rounded-md shadow shadow-black py-1 px-6 absolute bottom-10 right-10 cursor-pointer"}
-                    onClick={() => navigate("/setup")}/>
+            <div className={"absolute bottom-10 right-10 flex items-center gap-4"}>
+                <Button label={"Start Over"}
+                        className={"bg-rose-900 text-white rounded-md shadow shadow-black py-1 px-6  cursor-pointer"}
+                        onClick={() => navigate("/setup")}/>
+            <Button label={"Review"}
+                    className={"bg-rose-900 text-white rounded-md shadow shadow-black py-1 px-6 cursor-pointer"}
+                    onClick={() => navigate("/questions?reivewMode=true")}/>
+            </div>
         </>
 
     );

@@ -5,7 +5,7 @@ import {UserAnswerAction, UserAnswerContext, UserAnswerInterface} from "../../Co
 import * as React from "react";
 
 
-function Question({question ,current}: { question: QuestionInterface , current : number}) {
+function Question({question ,current , reviewMode}: { question: QuestionInterface , current : number, reviewMode : string | boolean}) {
     const answers = [...question.incorrect_answers, question.correct_answer];
     const {dispatchUserAnswer , userAnswer} = useContext(UserAnswerContext) as {userAnswer: UserAnswerInterface; dispatchUserAnswer: React. ActionDispatch<[action: UserAnswerAction]>};
 
@@ -19,7 +19,10 @@ function Question({question ,current}: { question: QuestionInterface , current :
             <div className={"grid grid-cols-2 gap-5 items-center"}>
                 {
                     shuffleAnswer.map((item) => {
-                        return <RadioButton key={item} label={item} id={item} value={item} name={"answer-" + question.question} checked={item === userAnswer[current]?.answer}
+                        return <RadioButton key={item} label={item} id={item} value={item} name={"answer-" + question.question+current}
+                                            checked={reviewMode ? item === question.correct_answer :  item === userAnswer[current]?.answer}
+                                            disabled={!!reviewMode}
+                                            variant={!!reviewMode && item === userAnswer[current]?.answer ? "rose" : 'purple'}
                                             onChange={() => {
                                                 dispatchUserAnswer({type : "SET_UserAnswer" , payload : {...userAnswer, [current] : {answer : item}}})
                                             }}/>

@@ -2,11 +2,19 @@ import Question from "../../components/Question/Question.tsx";
 import Button from "../../components/Base/Button/Button.tsx";
 import {useContext, useState} from "react";
 import {QuestionContext, QuestionInterface} from "../../Context/QuestionContext.tsx";
-import {useNavigate} from "react-router";
+import {useNavigate, useSearchParams} from "react-router";
 
 
 
 function Questions() {
+    const [queryParams] = useSearchParams();
+    const reviewMode = queryParams.get("reivewMode");
+
+    console.log(reviewMode)
+
+
+
+
     const [current, setCurrent] = useState<number>(0);
     const navigate = useNavigate();
 
@@ -25,7 +33,7 @@ function Questions() {
     }
     return (
         <div className={"flex items-start justify-center p-2 w-full relative h-full"}>
-            <Question question={questions[current]} current={current}/>
+            <Question question={questions[current]} current={current} reviewMode={reviewMode ?? false}/>
 
             <div className={"absolute bottom-0 right-0 flex items-center"}>
                 <Button label={"<"}
@@ -34,7 +42,7 @@ function Questions() {
                 {
                     questions.length - 1 === current
                         ?
-                        <Button label={"Attempt To Finish"}
+                        <Button label={reviewMode ? "back To Result" : "Attempt To Finish"}
                                 className={"dark:bg-[#FEEACF] bg-[#dda15e] text-black font-bold text-xl px-3 py-1 hover:bg-black  cursor-pointer hover:text-white transition ease-in duration-200 rounded-r-lg"}
                                 onClick={() => {
                                     navigate("/result")
