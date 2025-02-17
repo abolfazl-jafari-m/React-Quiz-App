@@ -23,7 +23,7 @@ function Questions() {
         }
     }
     return (
-        <div className={"flex items-start justify-center p-2 w-full relative h-2/3"}>
+        <div className={"flex items-start justify-center p-2 w-full relative h-full"}>
 
             <Question question={questions[current]} current={current}/>
 
