@@ -1,4 +1,4 @@
-import {createContext, useState} from "react";
+import {createContext, useReducer} from "react";
 import * as React from "react";
 
 export interface UserAnswerInterface {
@@ -6,13 +6,29 @@ export interface UserAnswerInterface {
         answer : string
     }
 }
-export const UserAnswerContext = createContext<{userAnswer: UserAnswerInterface; setUserAnswer: React. Dispatch<React. SetStateAction<UserAnswerInterface>>; } | null>(null);
+
+export type UserAnswerAction = {
+    type : "SET_UserAnswer",
+    payload : UserAnswerInterface
+}
+
+const userAnswerReducer = (state : UserAnswerInterface , action :UserAnswerAction)=>{
+    switch (action.type){
+        case "SET_UserAnswer":
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+export const UserAnswerContext = createContext<{userAnswer: UserAnswerInterface; dispatchUserAnswer: React. ActionDispatch<[action: UserAnswerAction]>; } | null>(null);
 
 export function UserAnswerContextProvider({children}: { children: React.ReactNode }) {
-    const [userAnswer, setUserAnswer] = useState<UserAnswerInterface>({});
+    // const [userAnswer, setUserAnswer] = useState<UserAnswerInterface>({});
+    const [userAnswer , dispatchUserAnswer] = useReducer(userAnswerReducer, {});
 
     return (
-        <UserAnswerContext value={{userAnswer, setUserAnswer}}>
+        <UserAnswerContext value={{userAnswer, dispatchUserAnswer}}>
             {children}
         </UserAnswerContext>
     )

@@ -1,4 +1,4 @@
-import {createContext, useState} from "react";
+import {createContext, useReducer} from "react";
 import * as React from "react";
 
 export interface QuestionInterface {
@@ -10,19 +10,31 @@ export interface QuestionInterface {
     incorrect_answers: string[]
 }
 
+export type ActionType = {
+    type : "SET_Questions",
+    payload : QuestionInterface[]
+}
+const questionReducer = (state :QuestionInterface[] , action :ActionType)=>{
+    switch (action.type){
+        case "SET_Questions":
+            return action.payload;
+        default :
+            return state;
+    }
+}
+
 
 export const QuestionContext = createContext<{
-    setQuestions: React.Dispatch<React.SetStateAction<QuestionInterface[]>>,
+     dispatchQuestions: React. ActionDispatch<[action: ActionType]>,
     questions: QuestionInterface[]
 } | null>(null);
 
 
-
 export function QuestionProvider({children}: { children: React.ReactNode }) {
-    const [questions, setQuestions] = useState<QuestionInterface[]>([]);
+    const [questions , dispatchQuestions] =useReducer(questionReducer , [])
 
     return (
-        <QuestionContext value={{setQuestions, questions}}>
+        <QuestionContext value={{dispatchQuestions, questions}}>
             {children}
         </QuestionContext>
     )

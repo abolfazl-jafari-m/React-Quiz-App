@@ -1,12 +1,13 @@
 import RadioButton from "../Base/RadioButton/RadioButton.tsx";
 import {QuestionInterface} from "../../Context/QuestionContext.tsx";
 import {useContext, useMemo} from "react";
-import {UserAnswerContext, UserAnswerInterface} from "../../Context/UserAnswerContext.tsx";
+import {UserAnswerAction, UserAnswerContext, UserAnswerInterface} from "../../Context/UserAnswerContext.tsx";
+import * as React from "react";
 
 
 function Question({question ,current}: { question: QuestionInterface , current : number}) {
     const answers = [...question.incorrect_answers, question.correct_answer];
-    const {setUserAnswer , userAnswer} = useContext(UserAnswerContext) as any;
+    const {dispatchUserAnswer , userAnswer} = useContext(UserAnswerContext) as {userAnswer: UserAnswerInterface; dispatchUserAnswer: React. ActionDispatch<[action: UserAnswerAction]>};
 
     const shuffleAnswer = useMemo(()=>answers.sort(() => Math.random() - 0.5) , [question])
 
@@ -20,7 +21,7 @@ function Question({question ,current}: { question: QuestionInterface , current :
                     shuffleAnswer.map((item) => {
                         return <RadioButton key={item} label={item} id={item} value={item} name={"answer-" + question.question} checked={item === userAnswer[current]?.answer}
                                             onChange={() => {
-                                                setUserAnswer((prev : UserAnswerInterface)  => ({...prev, [current] : {answer : item}}))
+                                                dispatchUserAnswer({type : "SET_UserAnswer" , payload : {...userAnswer, [current] : {answer : item}}})
                                             }}/>
                     })
                 }

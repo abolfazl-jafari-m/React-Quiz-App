@@ -4,8 +4,9 @@ import Button from "../../components/Base/Button/Button.tsx";
 import {useNavigate} from "react-router";
 import {ChangeEvent, FormEvent, useContext, useEffect, useState} from "react";
 import {getQuestions} from "../../Services/Questions.ts";
-import {QuestionContext} from "../../Context/QuestionContext.tsx";
+import {ActionType, QuestionContext} from "../../Context/QuestionContext.tsx";
 import Loading from "../../components/Loading/Loading.tsx";
+import * as React from "react";
 
 interface CategoryInterface {
     id: string | number,
@@ -32,7 +33,9 @@ function Setup() {
     const [formData, setFormData] = useState<FormDataInterface>({})
     const levels = [{name: "easy", id: 1}, {name: "medium", id: 2}, {name: "hard", id: 3}];
 
-    const {setQuestions} = useContext(QuestionContext) as any;
+    const {dispatchQuestions} = useContext(QuestionContext) as {
+        dispatchQuestions: React.ActionDispatch<[action: ActionType]>
+    };
 
 
     const handleForm = (e: FormEvent<HTMLFormElement>) => {
@@ -45,8 +48,7 @@ function Setup() {
         if (formData.qCount && formData.qCategory && formData.qDifficulty) {
             getQuestions(count, category as number, difficulty as string)
                 .then(res => {
-                    setQuestions(res);
-                    localStorage.setItem("questions", JSON.stringify(res));
+                    dispatchQuestions({type: "SET_Questions", payload: res});
                     navigate("/questions");
                 }).finally(() => setIsLoading(false));
         }
@@ -115,7 +117,7 @@ function Setup() {
                         className={"transition ease-in duration-200 bg-rose-900 dark:bg-rose-600 text-white py-2 px-7 rounded-md shadow absolute right-0 bottom-0 cursor-pointer shadow-black disabled:bg-rose-200 disabled:text-black/50"}/>
             </form>
             {
-                isLoading &&<Loading/>
+                isLoading && <Loading/>
             }
         </>
 

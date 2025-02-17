@@ -25,11 +25,9 @@ function Questions() {
     }
     return (
         <div className={"flex items-start justify-center p-2 w-full relative h-full"}>
-
             <Question question={questions[current]} current={current}/>
 
             <div className={"absolute bottom-0 right-0 flex items-center"}>
-
                 <Button label={"<"}
                         onClick={prev}
                         className={"dark:bg-[#FEEACF] bg-[#dda15e] text-black font-bold text-xl px-3 py-1 hover:bg-black  cursor-pointer hover:text-white transition ease-in duration-200 rounded-l-lg"}/>
@@ -47,7 +45,6 @@ function Questions() {
                                 onClick={next}
                         />
                 }
-
             </div>
 
         </div>
