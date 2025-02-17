@@ -28,8 +28,8 @@ function Result() {
 
     return (
         <>
-            <div className={"flex flex-col gap-5 items-center justify-center p-10 dark:text-white relative"}>
-                <h3 className={"text-4xl font-bold tracking-tight"}>Congratulations , You Finish The Quiz</h3>
+            <div className={"flex flex-col gap-5 items-center justify-center p-10 max-sm:p-2 dark:text-white relative"}>
+                <h3 className={"text-4xl font-bold tracking-tight max-sm:text-2xl max-md:text-3xl"}>Congratulations , You Finish The Quiz</h3>
                 <p>If You Ready For Result Press The Button Blow</p>
                 <Button label={"Result"}
                         onClick={() => setShowResult(true)}
@@ -52,12 +52,12 @@ function Result() {
                 }
 
             </div>
-            <div className={"absolute bottom-10 right-10 flex items-center gap-4"}>
+            <div className={"absolute bottom-10 right-10 flex items-center gap-4 max-sm:right-5 max-sm:bottom-5"}>
                 <Button label={"Start Over"}
-                        className={"bg-rose-900 text-white rounded-md shadow shadow-black py-1 px-6  cursor-pointer"}
+                        className={"bg-rose-900 text-white rounded-md shadow shadow-black py-1 px-6  cursor-pointer max-sm:text-sm"}
                         onClick={() => navigate("/setup")}/>
             <Button label={"Review"}
-                    className={"bg-rose-900 text-white rounded-md shadow shadow-black py-1 px-6 cursor-pointer"}
+                    className={"bg-rose-900 text-white rounded-md shadow shadow-black py-1 px-6 cursor-pointer max-sm:text-sm"}
                     onClick={() => navigate("/questions?reivewMode=true")}/>
             </div>
         </>

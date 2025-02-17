@@ -20,7 +20,7 @@ function Input({type, className, onChange, placeholder, name, id, value, label, 
             <label htmlFor={id}>{label}</label>
             <input type={type} className={className} onChange={onChange}  placeholder={placeholder}
                    name={name} id={id} value={value} ref={ref}/>
-            <span className={"text-sm dark:text-red-200 text-red-600 h-3"}>{error}</span>
+            <span className={"text-sm dark:text-red-200 text-red-600 h-3 max-sm:text-xs"}>{error}</span>
         </div>
     );
 }

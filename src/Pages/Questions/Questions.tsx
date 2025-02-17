@@ -10,10 +10,6 @@ function Questions() {
     const [queryParams] = useSearchParams();
     const reviewMode = queryParams.get("reivewMode");
 
-    console.log(reviewMode)
-
-
-
 
     const [current, setCurrent] = useState<number>(0);
     const navigate = useNavigate();
@@ -35,21 +31,21 @@ function Questions() {
         <div className={"flex items-start justify-center p-2 w-full relative h-full"}>
             <Question question={questions[current]} current={current} reviewMode={reviewMode ?? false}/>
 
-            <div className={"absolute bottom-0 right-0 flex items-center"}>
+            <div className={"absolute bottom-0 right-0 flex items-center max-sm:bottom-1 max-sm:right-1"}>
                 <Button label={"<"}
                         onClick={prev}
-                        className={"dark:bg-[#FEEACF] bg-[#dda15e] text-black font-bold text-xl px-3 py-1 hover:bg-black  cursor-pointer hover:text-white transition ease-in duration-200 rounded-l-lg"}/>
+                        className={"dark:bg-[#FEEACF] bg-[#dda15e] text-black font-bold text-xl   max-sm:text-[16px] px-3 py-1 hover:bg-black  cursor-pointer hover:text-white transition ease-in duration-200 rounded-l-lg"}/>
                 {
                     questions.length - 1 === current
                         ?
                         <Button label={reviewMode ? "back To Result" : "Attempt To Finish"}
-                                className={"dark:bg-[#FEEACF] bg-[#dda15e] text-black font-bold text-xl px-3 py-1 hover:bg-black  cursor-pointer hover:text-white transition ease-in duration-200 rounded-r-lg"}
+                                className={"dark:bg-[#FEEACF] bg-[#dda15e] text-black font-bold text-xl  max-sm:text-[16px]  px-3 py-1 hover:bg-black  cursor-pointer hover:text-white transition ease-in duration-200 rounded-r-lg"}
                                 onClick={() => {
                                     navigate("/result")
                                 }}/>
                         :
                         <Button label={">"}
-                                className={"dark:bg-[#FEEACF] bg-[#dda15e] text-black font-bold text-xl px-3 py-1 hover:bg-black  cursor-pointer hover:text-white transition ease-in duration-200 rounded-r-lg"}
+                                className={"dark:bg-[#FEEACF] bg-[#dda15e] text-black font-bold text-xl max-sm:text-[16px] px-3 py-1 hover:bg-black  cursor-pointer hover:text-white transition ease-in duration-200 rounded-r-lg"}
                                 onClick={next}
                         />
                 }

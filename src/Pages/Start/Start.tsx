@@ -6,8 +6,8 @@ function Start() {
     const navigate = useNavigate();
     return (
         <div className={"flex items-center h-full dark:text-white  flex-col gap-5 justify-between"}>
-            <div className={"w-1/2"}>
-                <h2 className={"text-6xl font-bold tracking-widest animate-typewriter overflow-hidden text-nowrap border-r-4 border-black dark:border-white text-center "}>Welcome
+            <div className={"w-1/2 max-md:w-full max-sm:w-full max-lg:w-2/3 "}>
+                <h2 className={"text-6xl max-lg:text-4xl max-md:text-2xl max-sm:text-md font-bold tracking-widest animate-typewriter overflow-hidden text-nowrap border-r-4 border-black dark:border-white text-center "}>Welcome
                     To NV QUIZ</h2>
             </div>
             <div className={"flex flex-col gap-2 items-center"}>
