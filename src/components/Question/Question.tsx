@@ -20,7 +20,7 @@ function Question({question ,current}: { question: QuestionInterface , current :
                 {
                     shuffleAnswer.map((item) => {
                         return <RadioButton key={item} label={item} id={item} value={item} name={"answer-" + question.question} checked={item === userAnswer[current]?.answer}
-                                            onClick={() => {
+                                            onChange={() => {
                                                 setUserAnswer(prev  => ({...prev, [current] : {answer : item}}))
                                             }}/>
                     })
