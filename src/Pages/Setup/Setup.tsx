@@ -5,7 +5,7 @@ import {useNavigate} from "react-router";
 import {ChangeEvent, FormEvent, useContext, useEffect, useState} from "react";
 import {getQuestions} from "../../Services/Questions.ts";
 import {QuestionContext} from "../../Context/QuestionContext.tsx";
-import Loading from "../../components/Loading.tsx";
+import Loading from "../../components/Loading/Loading.tsx";
 
 interface CategoryInterface {
     id: string | number,

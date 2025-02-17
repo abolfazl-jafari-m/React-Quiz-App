@@ -1,16 +1,20 @@
 import {useContext, useMemo, useState} from "react";
 import {QuestionContext, QuestionInterface} from "../../Context/QuestionContext.tsx";
-import {UserAnswerContext} from "../../Context/UserAnswerContext.tsx";
+import {UserAnswerContext, UserAnswerInterface} from "../../Context/UserAnswerContext.tsx";
 import Button from "../../components/Base/Button/Button.tsx";
 import {BsEmojiFrownFill, BsFillEmojiSunglassesFill} from "react-icons/bs";
 import {useNavigate} from "react-router";
+import * as React from "react";
 
 function Result() {
     const navigate = useNavigate();
     const [showResult, setShowResult] = useState<boolean>(false);
-    const {questions} = useContext(QuestionContext) as any;
-    const {userAnswer} = useContext(UserAnswerContext) as any;
-    const correctAnswer = questions.map((item: QuestionInterface) => item.correct_answer);
+    const {questions} = useContext(QuestionContext) as {
+        setQuestions: React.Dispatch<React.SetStateAction<QuestionInterface[]>>,
+        questions: QuestionInterface[]
+    };
+    const {userAnswer} = useContext(UserAnswerContext) as { userAnswer: UserAnswerInterface; setUserAnswer: React. Dispatch<React. SetStateAction<UserAnswerInterface>>; };
+    const correctAnswer :string[] = questions.map((item: QuestionInterface) => item.correct_answer);
     const calculateResults = () => {
         let point: number = 0
         for (const answer in userAnswer) {
@@ -21,9 +25,6 @@ function Result() {
         return point
     }
     const result = useMemo(calculateResults, []);
-
-    console.log(questions.length / result )
-
     return (
         <>
             <div className={"flex flex-col gap-5 items-center justify-center p-10 dark:text-white relative"}>
@@ -38,7 +39,7 @@ function Result() {
                         <p>
                             You Answer {result} of {questions.length} Correctly
                         </p>
-                        {result /questions.length *100 > 50
+                        {result / questions.length * 100 > 50
                             ?
                             <BsFillEmojiSunglassesFill size={"48px"}
                                                        className={"text-yellow-600 dark:text-yellow-500"}/>
@@ -51,7 +52,8 @@ function Result() {
 
             </div>
             <Button label={"Start Over"}
-                    className={"bg-rose-900 text-white rounded-md shadow shadow-black py-1 px-6 absolute bottom-10 right-10 cursor-pointer"} onClick={()=>navigate("/setup")}/>
+                    className={"bg-rose-900 text-white rounded-md shadow shadow-black py-1 px-6 absolute bottom-10 right-10 cursor-pointer"}
+                    onClick={() => navigate("/setup")}/>
         </>
 
     );
