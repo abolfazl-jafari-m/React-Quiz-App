@@ -22,6 +22,7 @@ function Result() {
     }
     const result = useMemo(calculateResults, []);
 
+    console.log(questions.length / result )
 
     return (
         <>
@@ -37,12 +38,12 @@ function Result() {
                         <p>
                             You Answer {result} of {questions.length} Correctly
                         </p>
-                        {questions.length / result * 100 > 50
+                        {result /questions.length *100 > 50
                             ?
                             <BsFillEmojiSunglassesFill size={"48px"}
-                                                       className={"text-yellow-800 dark:text-yellow-500"}/>
+                                                       className={"text-yellow-600 dark:text-yellow-500"}/>
                             :
-                            <BsEmojiFrownFill size={"48px"} className={"text-yellow-800 dark:text-yellow-500"}/>
+                            <BsEmojiFrownFill size={"48px"} className={"text-amber-700 dark:text-yellow-500"}/>
 
                         }
                     </div>)

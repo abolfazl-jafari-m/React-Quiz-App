@@ -4,13 +4,15 @@ import Start from "./Pages/Start/Start";
 import Setup from "./Pages/Setup/Setup.tsx";
 import Questions from "./Pages/Questions/Questions.tsx";
 import Result from "./Pages/Result/Result.tsx";
+import Onboarding from "./Pages/Onboarding/Onboarding.tsx";
 
 function App() {
     return (
         <>
             <Routes>
                 <Route path="/" element={<Layout/>}>
-                    <Route index element={<Start/>}/>
+                    <Route index element={<Onboarding/>}/>
+                    <Route path={"/start"} element={<Start/>}/>
                     <Route path={"/setup"} element={<Setup/>}/>
                     <Route path={"/questions"} element={<Questions/>}/>
                     <Route path={"/result"} element={<Result/>}/>
