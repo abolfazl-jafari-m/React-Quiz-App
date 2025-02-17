@@ -2,7 +2,7 @@ import {createContext, useState} from "react";
 import * as React from "react";
 
 export interface UserAnswerInterface {
-    id : {
+    id ?: {
         answer : string
     }
 }

@@ -1,7 +1,7 @@
 import Question from "../../components/Question/Question.tsx";
 import Button from "../../components/Base/Button/Button.tsx";
-import {useContext, useState} from "react";
-import {QuestionContext} from "../../Context/QuestionContext.tsx";
+import { useState} from "react";
+// import {QuestionContext} from "../../Context/QuestionContext.tsx";
 import {useNavigate} from "react-router";
 
 
@@ -9,7 +9,8 @@ function Questions() {
     const [current, setCurrent] = useState<number>(0);
     const navigate = useNavigate();
 
-    const {questions} = useContext(QuestionContext) as any;
+    // const {questions} = useContext(QuestionContext) as any;
+    const  questions = JSON.parse(localStorage.getItem("questions") ?? "");
 
     const next = () => {
         if (questions.length - 1 > current) {

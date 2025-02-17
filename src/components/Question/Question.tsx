@@ -1,7 +1,7 @@
 import RadioButton from "../Base/RadioButton/RadioButton.tsx";
 import {QuestionInterface} from "../../Context/QuestionContext.tsx";
 import {useContext, useMemo} from "react";
-import {UserAnswerContext} from "../../Context/UserAnswerContext.tsx";
+import {UserAnswerContext, UserAnswerInterface} from "../../Context/UserAnswerContext.tsx";
 
 
 function Question({question ,current}: { question: QuestionInterface , current : number}) {
@@ -10,7 +10,6 @@ function Question({question ,current}: { question: QuestionInterface , current :
 
     const shuffleAnswer = useMemo(()=>answers.sort(() => Math.random() - 0.5) , [question])
 
-    console.log(userAnswer)
     return (
         <div className={"flex flex-col gap-14 p-3 "}>
             <div className={"bg-white rounded-lg shadow-lg  shadow-black px-10 py-5 w-full text-xl font-sans"}>
@@ -21,7 +20,7 @@ function Question({question ,current}: { question: QuestionInterface , current :
                     shuffleAnswer.map((item) => {
                         return <RadioButton key={item} label={item} id={item} value={item} name={"answer-" + question.question} checked={item === userAnswer[current]?.answer}
                                             onChange={() => {
-                                                setUserAnswer(prev  => ({...prev, [current] : {answer : item}}))
+                                                setUserAnswer((prev : UserAnswerInterface)  => ({...prev, [current] : {answer : item}}))
                                             }}/>
                     })
                 }

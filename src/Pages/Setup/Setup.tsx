@@ -43,6 +43,7 @@ function Setup() {
             getQuestions(count, category as number, difficulty as string)
                 .then(res => {
                     setQuestions(res);
+                    localStorage.setItem("questions" , JSON.stringify(res));
                     navigate("/questions");
                 });
         }
