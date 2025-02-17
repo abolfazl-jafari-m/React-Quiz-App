@@ -1,3 +1,4 @@
+import {motion} from "motion/react";
 
 interface IProps {
     label : string,
@@ -18,10 +19,10 @@ function RadioButton({label , id , value , name , onChange , variant = 'purple' 
         rose : "bg-rose-800 dark:bg-rose-600 ring ring-rose-200 rounded-md shadow-md shadow-black p-3 has-checked:bg-teal-700 has-checked:ring-2 has-checked:ring-green-950  dark:has-checked:ring-green-200",
     }
     return (
-        <div className={`relative ${theme[variant]} max-sm:text-sm`}>
+        <motion.button whileTap={{scale : 0.8 , opacity: 0 }} className={`relative ${theme[variant]} max-sm:text-sm`}>
             <label htmlFor={id} className={"text-white"}>{label}</label>
             <input type={"radio"} value={value} name={name} id={id} className={"appearance-none absolute w-full h-full top-0 left-0 z-10 cursor-pointer"} onChange={onChange} checked={checked} disabled={disabled}/>
-        </div>
+        </motion.button>
     );
 }
 

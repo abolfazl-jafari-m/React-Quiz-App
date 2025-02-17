@@ -2,7 +2,7 @@ import {useState} from "react"
 import {Outlet, useLocation} from "react-router"
 import {FaMoon, FaSun} from "react-icons/fa";
 import logo from "../assets/Images/logo.png";
-import {motion} from "framer-motion";
+import {motion} from "motion/react";
 
 function Layout() {
     const pageVariants = {
