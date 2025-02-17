@@ -1,7 +1,7 @@
 import {createContext, useState} from "react";
 import * as React from "react";
 
-interface QuestionInterface {
+export interface QuestionInterface {
     type: string,
     difficulty: string,
     category: string,
@@ -12,8 +12,8 @@ interface QuestionInterface {
 
 
 export const QuestionContext = createContext<{
-    setQuestions: React.Dispatch<React.SetStateAction<QuestionInterface[]>>;
-    questions: QuestionInterface[];
+    setQuestions: React.Dispatch<React.SetStateAction<QuestionInterface[]>>,
+    questions: QuestionInterface[]
 } | null>(null);
 
 export function QuestionProvider({children}: { children: React.ReactNode }) {
