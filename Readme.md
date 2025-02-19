@@ -1,8 +1,8 @@
 # $$Quiz App$$
 
 ------------
-> > Quiz App using React+TypeScript styled by TailwindCss that`s responsive get question from api and having dark mode &
-> > review mode
+>  Quiz App using React+TypeScript styled by TailwindCss that`s responsive get question from api and having dark mode &
+>  review mode
 
 ### $Features$
 
