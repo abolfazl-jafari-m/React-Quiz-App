@@ -18,6 +18,7 @@ function Router() {
                 <Route path={"/questions"} element={<Questions/>}/>
                 <Route path={"/result"} element={<Result/>}/>
             </Route>
+            {/*<Route path={"*"} element={<NotFound/>}/>*/}
         </Routes>
     );
 }

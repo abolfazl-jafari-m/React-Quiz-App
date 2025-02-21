@@ -25,7 +25,7 @@ function Layout() {
     const { pathname } = useLocation();
     return (
         <div className={isDark ? "dark" : ""}>
-            <div className="bg-lime-300/50  dark:bg-emerald-950 w-full h-screen flex flex-col p-10 max-sm:p-3 max-md:p-5 relative font-Sour transition duration-200 ease-in ">
+            <div className="bg-lime-300/50  dark:bg-emerald-950 w-full h-svh flex flex-col p-10 max-sm:p-3 max-md:p-5 relative font-Sour transition duration-200 ease-in ">
                 <div className={"flex flex-col items-center dark:text-white mb-10"}>
                     <img src={logo} alt={"logo"} className={"w-24"}/>
                     <h1 className="text-center text-5xl font-bold tracking-wide mt-4 max-sm:text-2xl">Quiz App</h1>

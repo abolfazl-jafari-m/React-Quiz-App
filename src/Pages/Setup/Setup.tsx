@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router";
-import { FormEvent, useContext, useEffect, useState} from "react";
+import {FormEvent, useContext, useEffect, useState} from "react";
 import {getQuestions} from "../../Services/Questions.ts";
 import {ActionType, QuestionContext} from "../../Context/QuestionContext.tsx";
 import Loading from "../../components/Loading/Loading.tsx";
@@ -37,8 +37,8 @@ function Setup() {
     };
 
     const handleForm = (e: FormEvent<HTMLFormElement>) => {
-        setIsLoading(true);
         e.preventDefault();
+        setIsLoading(true);
         const category = categories.find(item => item.id === Number(formData.qCategory))?.id;
         const difficulty = levels.find(item => item.id === Number(formData.qDifficulty))?.name;
         const count = Number(formData.qCount);
@@ -54,7 +54,7 @@ function Setup() {
     const validation = () => {
         const newError: ErrorInterface = {};
         if (Number(formData.qCount) < 5 || Number(formData.qCount) > 60) {
-            newError.count = "Please Set a Valid Number";
+            newError.count = "Please Set a Number between 5 to 60";
         }
         if (formData.qDifficulty === "") {
             newError.difficulty = "Please Set a Level of Questions";
@@ -76,7 +76,8 @@ function Setup() {
 
     return (
         <>
-            <Form handleForm={handleForm} categories={categories} errors={errors} formData={formData} setFormData={setFormData} levels={levels}/>
+            <Form handleForm={handleForm} categories={categories} errors={errors} formData={formData}
+                  setFormData={setFormData} levels={levels}/>
             {
                 isLoading && <Loading/>
             }

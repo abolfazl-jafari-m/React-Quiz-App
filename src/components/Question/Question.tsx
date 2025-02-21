@@ -3,6 +3,8 @@ import {QuestionInterface} from "../../Context/QuestionContext.tsx";
 import {useContext, useMemo} from "react";
 import {UserAnswerAction, UserAnswerContext, UserAnswerInterface} from "../../Context/UserAnswerContext.tsx";
 import * as React from "react";
+import {motion} from "motion/react";
+
 
 
 function Question({question ,current , reviewMode}: { question: QuestionInterface , current : number, reviewMode : string | boolean}) {
@@ -12,7 +14,7 @@ function Question({question ,current , reviewMode}: { question: QuestionInterfac
     const shuffleAnswer = useMemo(()=>answers.sort(() => Math.random() - 0.5) , [question])
 
     return (
-        <div className={"flex flex-col gap-14 max-sm:gap-5 p-3 "}>
+        <motion.div layout={true}   className={"flex flex-col gap-14 max-sm:gap-5 p-3 "}>
             <div  className={"bg-white rounded-lg shadow-lg  shadow-black px-10 py-5 max-sm:px-5 max-sm:py-2 max-sm:text-[16px] w-full text-xl font-sans"}>
                 {question?.question}
             </div>
@@ -30,7 +32,7 @@ function Question({question ,current , reviewMode}: { question: QuestionInterfac
                 }
 
             </div>
-        </div>
+        </motion.div>
     );
 }
 
